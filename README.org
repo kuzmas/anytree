@@ -16,20 +16,6 @@ Here's a list of the major points:
 
       The idea is borrowed from the Linux kernel.
 
-    - On most architectures (at least the ones I'm using), pointers
-      have some unused bits which can be used to store node's
-      meta-data. This allows to reduce the size of the node structure,
-      and make them as small as possible on a vast majority of
-      architectures.
-
-      If the hardware you're working on doesn't allow such
-      optimisation, the library still provides an implementation which
-      is fully portable (C99), at the cost of an increasing node
-      structure size.
-
-      For now, the optimised (but non portable) version is used if
-      'uintptr_t' is defined on your platform.
-
     - Traversals in both direction are efficient for all type of
       trees. When needed, some implementations use *threaded* trees
       making the traversal algorithm much simpler.
@@ -143,16 +129,18 @@ node of a tree.
 
 * Installation
 
-The current Makefile has been tested only on Linux system.
+The current Makefile has been tested on Linux and Windows system.
 
-To compile and install the library, just do:
+To compile and install the library, just do something like, assuming
+current directory is named 'anytree' and contains source code:
 
+  : $ mkdir ../anytree-build
+  : $ cmake ../anytree
   : $ make
-  : $ make install
+  : $ sudo make install
 
-By default the library will be installed in '/usr/local/lib' directory.
-
-As usual you change this path by passing 'prefix=' option.
-
-You can also change the installation root directory by passing
-'DESTDIR=' option.
+You can adjust target installation directory using CMAKE_INSTALL_PREFIX on step 2:
+on Linux:
+  : $ cmake -DCMAKE_INSTALL_PREFIX=/opt ../anytree
+on Windows:
+  : $ cmake -DCMAKE_INSTALL_PREFIX=C:/packages ../anytree

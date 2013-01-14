@@ -1,11 +1,11 @@
-prefix=@prefix@
+prefix=@CMAKE_INSTALL_PREFIX@
 exec_prefix=${prefix}
-libdir=@libdir@
+libdir=${prefix}/lib
 includedir=${prefix}/include
 
 Name: libtree
 Description: A collection of binary seach trees
-Version: @major@.@minor@
+Version: @libtree_VERSION_MAJOR@.@libtree_VERSION_MINOR@
 Requires:
 Libs: -L${libdir} -ltree
 Cflags: -I${includedir}

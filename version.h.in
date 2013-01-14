@@ -1,0 +1,31 @@
+/*
+ * libtree.h - this file is part of Libtree.
+ *
+ * Copyright (C) 2013 Kuzma Shapran <kuzma.shapran@gmail.com>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; version 2 of the
+ * License.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+ * USA
+ */
+
+#ifndef ANYTREE__VERSION__INCLUDED
+#define ANYTREE__VERSION__INCLUDED
+
+#define ANYTREE_VERSION_MAJOR @anytree_VERSION_MAJOR@
+#define ANYTREE_VERSION_MINOR @anytree_VERSION_MINOR@
+#define ANYTREE_FULL_VERSION (@anytree_VERSION_MAJOR@ * 0x100 + @anytree_VERSION_MINOR@)
+#define ANYTREE_FULL_VERSION_FLOAT @anytree_VERSION_MAJOR@.@anytree_VERSION_MINOR@
+#define ANYTREE_FULL_VERSION_STR "@anytree_VERSION_MAJOR@.@anytree_VERSION_MINOR@"
+
+#endif // ANYTREE__VERSION__INCLUDED
