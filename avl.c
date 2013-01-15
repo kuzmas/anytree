@@ -28,10 +28,11 @@ static inline int is_root(struct avltree_node *node)
     return node->parent == NULL;
 }
 
-static inline void INIT_NODE(struct avltree_node *node)
+static inline void INIT_NODE(struct avltree_node *node, struct avltree *tree)
 {
     node->left = NULL;
     node->right = NULL;
+    node->tree = tree;
     node->parent = NULL;
     node->balance = 0;
 }
@@ -61,8 +62,7 @@ static inline struct avltree_node *get_parent(const struct avltree_node *node)
     return node->parent;
 }
 
-static inline void set_parent(struct avltree_node *parent,
-                  struct avltree_node *node)
+static inline void set_parent(struct avltree_node *parent, struct avltree_node *node)
 {
     node->parent = parent;
 }
@@ -209,8 +209,7 @@ struct avltree_node *avltree_lookup(const struct avltree_node *key,
     return do_lookup(key, tree, &parent, &unbalanced, &is_left);
 }
 
-static void set_child(struct avltree_node *child,
-              struct avltree_node *node, int left)
+static void set_child(struct avltree_node *child, struct avltree_node *node, int left)
 {
     if (left)
         node->left = child;
@@ -228,7 +227,7 @@ struct avltree_node *avltree_insert(struct avltree_node *node, struct avltree *t
     if (key)
         return key;
 
-    INIT_NODE(node);
+    INIT_NODE(node, tree);
 
     if (!parent) {
         tree->root = node;

@@ -70,6 +70,14 @@ static inline int is_red(struct rbtree_node *node)
     return !is_black(node);
 }
 
+static inline void INIT_NODE(struct rbtree_node *node, struct rbtree *tree)
+{
+    node->left = NULL;
+    node->right = NULL;
+    node->tree = tree;
+    set_color(RB_RED, node);
+}
+
 /*
  * Iterators
  */
@@ -218,9 +226,7 @@ struct rbtree_node *rbtree_insert(struct rbtree_node *node, struct rbtree *tree)
     if (key)
         return key;
 
-    node->left = NULL;
-    node->right = NULL;
-    set_color(RB_RED, node);
+    INIT_NODE(node, tree);
     set_parent(parent, node);
 
     if (parent) {

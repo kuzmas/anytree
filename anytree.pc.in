@@ -7,5 +7,5 @@ Name: libtree
 Description: A collection of binary seach trees
 Version: @libtree_VERSION_MAJOR@.@libtree_VERSION_MINOR@
 Requires:
-Libs: -L${libdir} -ltree
+Libs: -L${libdir} -l@PROJECT_NAME@
 Cflags: -I${includedir}

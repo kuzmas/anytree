@@ -41,7 +41,10 @@
  * Threaded binary search tree
  */
 
+struct bstree;
+
 struct bstree_node {
+    struct bstree *tree;
     struct bstree_node *left, *right;
     unsigned left_is_thread:1;
     unsigned right_is_thread:1;
@@ -50,8 +53,9 @@ struct bstree_node {
 typedef int (*bstree_cmp_fn_t)(const struct bstree_node *, const struct bstree_node *);
 
 struct bstree {
-    struct bstree_node *root;
     bstree_cmp_fn_t cmp_fn;
+
+    struct bstree_node *root;
     struct bstree_node *first, *last;
 };
 
@@ -64,6 +68,7 @@ struct bstree_node *bstree_lookup(const struct bstree_node *key, const struct bs
 struct bstree_node *bstree_insert(struct bstree_node *node, struct bstree *tree);
 void bstree_remove(struct bstree_node *node, struct bstree *tree);
 void bstree_replace(struct bstree_node *old, struct bstree_node *node, struct bstree *tree);
+
 int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__BS__INCLUDED */

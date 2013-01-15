@@ -41,7 +41,10 @@
  * AVL tree
  */
 
+struct avltree;
+
 struct avltree_node {
+    struct avltree *tree;
     struct avltree_node *left, *right;
     struct avltree_node *parent;
     signed balance:3;        /* balance factor [-2:+2] */
@@ -50,10 +53,12 @@ struct avltree_node {
 typedef int (*avltree_cmp_fn_t)(const struct avltree_node *, const struct avltree_node *);
 
 struct avltree {
-    struct avltree_node *root;
     avltree_cmp_fn_t cmp_fn;
-    int height;
+
+    struct avltree_node *root;
     struct avltree_node *first, *last;
+
+    int height;
 };
 
 struct avltree_node *avltree_first(const struct avltree *tree);
@@ -65,6 +70,7 @@ struct avltree_node *avltree_lookup(const struct avltree_node *key, const struct
 struct avltree_node *avltree_insert(struct avltree_node *node, struct avltree *tree);
 void avltree_remove(struct avltree_node *node, struct avltree *tree);
 void avltree_replace(struct avltree_node *old, struct avltree_node *node, struct avltree *tree);
+
 int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__AVL__INCLUDED */

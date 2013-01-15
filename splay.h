@@ -41,7 +41,10 @@
  * Splay tree
  */
 
+struct splaytree;
+
 struct splaytree_node {
+    struct splaytree *tree;
     struct splaytree_node *left, *right;
     unsigned left_is_thread:1;
     unsigned right_is_thread:1;
@@ -50,9 +53,10 @@ struct splaytree_node {
 typedef int (*splaytree_cmp_fn_t)(const struct splaytree_node *, const struct splaytree_node *);
 
 struct splaytree {
+    splaytree_cmp_fn_t cmp_fn;
+
     struct splaytree_node *root;
     struct splaytree_node *first, *last;
-    splaytree_cmp_fn_t cmp_fn;
 };
 
 struct splaytree_node *splaytree_first(const struct splaytree *tree);
@@ -64,6 +68,7 @@ struct splaytree_node *splaytree_lookup(const struct splaytree_node *key, struct
 struct splaytree_node *splaytree_insert( struct splaytree_node *node, struct splaytree *tree);
 void splaytree_remove(struct splaytree_node *node, struct splaytree *tree);
 void splaytree_replace(struct splaytree_node *old, struct splaytree_node *node, struct splaytree *tree);
+
 int splaytree_init(struct splaytree *tree, splaytree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__SPLAY__INCLUDED */

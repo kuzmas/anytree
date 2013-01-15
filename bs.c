@@ -31,10 +31,11 @@
 
 #define NODE_INIT    { NULL, }
 
-static inline void INIT_NODE(struct bstree_node *node)
+static inline void INIT_NODE(struct bstree_node *node, struct bstree *tree)
 {
     node->left = NULL;
     node->right = NULL;
+    node->tree = tree;
     node->left_is_thread = 0;
     node->right_is_thread = 0;
 }
@@ -182,7 +183,7 @@ struct bstree_node *bstree_insert(struct bstree_node *node, struct bstree *tree)
         return key;
 
     if (!parent) {
-        INIT_NODE(node);
+        INIT_NODE(node, tree);
         tree->root = tree->first = tree->last = node;
         return NULL;
     }
@@ -219,7 +220,7 @@ void bstree_remove(struct bstree_node *node, struct bstree *tree)
     do_lookup(node, tree, &parent, &is_left);
 
     if (!parent) {
-        INIT_NODE(&fake_parent);
+        INIT_NODE(&fake_parent, NULL);
         parent = &fake_parent;
         is_left = 0;
     }

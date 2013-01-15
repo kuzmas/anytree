@@ -19,16 +19,18 @@
  * USA
  */
 #include <assert.h>
+#include <memory.h>
 
 #include "splay.h"
 
 
 #define NODE_INIT    { NULL, }
 
-static inline void INIT_NODE(struct splaytree_node *node)
+static inline void INIT_NODE(struct splaytree_node *node, struct splaytree *tree)
 {
     node->left = NULL;
     node->right = NULL;
+    node->tree = tree;
     node->left_is_thread = 0;
     node->right_is_thread = 0;
 }
@@ -157,7 +159,8 @@ static inline void rotate_left(struct splaytree_node *node)
 
 static int do_splay(const struct splaytree_node *key, struct splaytree *tree)
 {
-    struct splaytree_node subroots = NODE_INIT;
+    struct splaytree_node subroots;
+    memset(&subroots, 0, sizeof(struct splaytree_node));
     struct splaytree_node *subleft = &subroots, *subright = &subroots;
     struct splaytree_node *root = tree->root;
     splaytree_cmp_fn_t cmp = tree->cmp_fn;
@@ -235,7 +238,7 @@ struct splaytree_node *splaytree_insert(struct splaytree_node *node, struct spla
     int res;
 
     if (!root) {
-        INIT_NODE(node);
+        INIT_NODE(node, tree);
         tree->root = node;
         tree->first = node;
         tree->last = node;
