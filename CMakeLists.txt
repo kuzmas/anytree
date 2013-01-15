@@ -10,6 +10,22 @@ message(STATUS "")
 message(STATUS "Version: ${FULL_VERSION}")
 message(STATUS "")
 
+add_definitions(-Wall)
+
+if(NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE Release)
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES [Dd]ebug)
+	message(STATUS "Debug build")
+	add_definitions(-DDEBUG)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+else()
+	message(STATUS "Release build")
+	add_definitions(-DNDEBUG)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2")
+endif()
+
 
 include_directories("${PROJECT_SOURCE_DIR}"
 	"${PROJECT_BINARY_DIR}")
