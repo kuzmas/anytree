@@ -1,5 +1,5 @@
 /*
- * libtree.h - this file is part of Libtree.
+ * anytree.h - this file is part of Anytree.
  *
  * Copyright (C) 2013 Kuzma Shapran <kuzma.shapran@gmail.com>
  *
@@ -26,8 +26,9 @@
 #include <anytree/version.h>
 #include <anytree/avl.h>
 #include <anytree/rb.h>
-#include <anytree/bst.h>
+#include <anytree/bs.h>
 #include <anytree/splay.h>
+#include <anytree/any.h>
 
 
 #endif // ANYTREE__INCLUDED

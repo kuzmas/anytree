@@ -1,5 +1,5 @@
 /*
- * libtree.h - this file is part of Libtree.
+ * rb.h - this file is part of Anytree.
  *
  * Copyright (C) 2010 Franck Bui-Huu <fbuihuu@gmail.com>
  * Copyright (C) 2013 Kuzma Shapran <kuzma.shapran@gmail.com>
@@ -57,7 +57,6 @@ struct rbtree {
     struct rbtree_node *root;
     rbtree_cmp_fn_t cmp_fn;
     struct rbtree_node *first, *last;
-    uint64_t reserved[4];
 };
 
 struct rbtree_node *rbtree_first(const struct rbtree *tree);
@@ -69,6 +68,6 @@ struct rbtree_node *rbtree_lookup(const struct rbtree_node *key, const struct rb
 struct rbtree_node *rbtree_insert(struct rbtree_node *node, struct rbtree *tree);
 void rbtree_remove(struct rbtree_node *node, struct rbtree *tree);
 void rbtree_replace(struct rbtree_node *old, struct rbtree_node *node, struct rbtree *tree);
-int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t cmp, unsigned long flags);
+int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__RB__INCLUDED */

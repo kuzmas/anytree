@@ -1,5 +1,5 @@
 /*
- * libtree.h - this file is part of Libtree.
+ * bst.h - this file is part of Anytree.
  *
  * Copyright (C) 2010 Franck Bui-Huu <fbuihuu@gmail.com>
  * Copyright (C) 2013 Kuzma Shapran <kuzma.shapran@gmail.com>
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
  */
-#ifndef ANYTREE__BST__INCLUDED
-#define ANYTREE__BST__INCLUDED
+#ifndef ANYTREE__BS__INCLUDED
+#define ANYTREE__BS__INCLUDED
 
 #include <stdint.h>
 #include <stddef.h>
@@ -53,7 +53,6 @@ struct bstree {
     struct bstree_node *root;
     bstree_cmp_fn_t cmp_fn;
     struct bstree_node *first, *last;
-    uint64_t reserved[4];
 };
 
 struct bstree_node *bstree_first(const struct bstree *tree);
@@ -65,6 +64,6 @@ struct bstree_node *bstree_lookup(const struct bstree_node *key, const struct bs
 struct bstree_node *bstree_insert(struct bstree_node *node, struct bstree *tree);
 void bstree_remove(struct bstree_node *node, struct bstree *tree);
 void bstree_replace(struct bstree_node *old, struct bstree_node *node, struct bstree *tree);
-int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp, unsigned long flags);
+int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp);
 
-#endif /* ANYTREE__BST__INCLUDED */
+#endif /* ANYTREE__BS__INCLUDED */

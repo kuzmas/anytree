@@ -32,16 +32,18 @@ configure_file(
 set(${PROJECT_NAME}_SOURCES
 	avl.c
 	rb.c
-	bst.c
+	bs.c
 	splay.c
+	any.c
 )
 
 set(${PROJECT_NAME}_PUBLIC_HEADERS
 	${PROJECT_BINARY_DIR}/version.h
 	avl.h
 	rb.h
-	bst.h
+	bs.h
 	splay.h
+	any.h
 )
 
 set(${PROJECT_NAME}_PRIVATE_HEADERS

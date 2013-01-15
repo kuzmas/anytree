@@ -1,5 +1,5 @@
 /*
- * libtree.h - this file is part of Libtree.
+ * splay.h - this file is part of Anytree.
  *
  * Copyright (C) 2010 Franck Bui-Huu <fbuihuu@gmail.com>
  * Copyright (C) 2013 Kuzma Shapran <kuzma.shapran@gmail.com>
@@ -53,7 +53,6 @@ struct splaytree {
     struct splaytree_node *root;
     struct splaytree_node *first, *last;
     splaytree_cmp_fn_t cmp_fn;
-    uint64_t reserved[4];
 };
 
 struct splaytree_node *splaytree_first(const struct splaytree *tree);
@@ -65,6 +64,6 @@ struct splaytree_node *splaytree_lookup(const struct splaytree_node *key, struct
 struct splaytree_node *splaytree_insert( struct splaytree_node *node, struct splaytree *tree);
 void splaytree_remove(struct splaytree_node *node, struct splaytree *tree);
 void splaytree_replace(struct splaytree_node *old, struct splaytree_node *node, struct splaytree *tree);
-int splaytree_init(struct splaytree *tree, splaytree_cmp_fn_t cmp, unsigned long flags);
+int splaytree_init(struct splaytree *tree, splaytree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__SPLAY__INCLUDED */

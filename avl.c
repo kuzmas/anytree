@@ -513,10 +513,8 @@ void avltree_replace(struct avltree_node *old, struct avltree_node *node, struct
     *node = *old;
 }
 
-int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp, unsigned long flags)
+int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp)
 {
-    if (flags)
-        return -1;
     tree->root = NULL;
     tree->cmp_fn = cmp;
     tree->height = -1;

@@ -444,10 +444,8 @@ void rbtree_replace(struct rbtree_node *old, struct rbtree_node *node, struct rb
     *node = *old;
 }
 
-int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t fn, unsigned long flags)
+int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t fn)
 {
-    if (flags)
-        return -1;
     tree->root = NULL;
     tree->cmp_fn = fn;
     tree->first = NULL;

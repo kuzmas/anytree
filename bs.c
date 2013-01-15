@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
  * USA
  */
-#include "bst.h"
+#include "bs.h"
 
 /*
  * This is where the black magic is defined. If you're lucky enough to
@@ -294,10 +294,8 @@ void bstree_replace(struct bstree_node *old, struct bstree_node *node, struct bs
     *node = *old;
 }
 
-int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp, unsigned long flags)
+int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp)
 {
-    if (flags)
-        return -1;
     tree->root = NULL;
     tree->cmp_fn = cmp;
     return 0;

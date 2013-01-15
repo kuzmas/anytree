@@ -1,5 +1,5 @@
 /*
- * libtree.h - this file is part of Libtree.
+ * avl.h - this file is part of Anytree.
  *
  * Copyright (C) 2010 Franck Bui-Huu <fbuihuu@gmail.com>
  * Copyright (C) 2013 Kuzma Shapran <kuzma.shapran@gmail.com>
@@ -54,7 +54,6 @@ struct avltree {
     avltree_cmp_fn_t cmp_fn;
     int height;
     struct avltree_node *first, *last;
-    uint64_t reserved[4];
 };
 
 struct avltree_node *avltree_first(const struct avltree *tree);
@@ -66,6 +65,6 @@ struct avltree_node *avltree_lookup(const struct avltree_node *key, const struct
 struct avltree_node *avltree_insert(struct avltree_node *node, struct avltree *tree);
 void avltree_remove(struct avltree_node *node, struct avltree *tree);
 void avltree_replace(struct avltree_node *old, struct avltree_node *node, struct avltree *tree);
-int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp, unsigned long flags);
+int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__AVL__INCLUDED */
