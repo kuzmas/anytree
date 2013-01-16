@@ -1,4 +1,19 @@
-#+TITLE: Libtree Description
+#+TITLE: Anytree Description
+
+* Overview
+
+This library is based on the Libtree library which contains
+C implementation of several kinds of tree-like structures.
+
+In addition to this, Anytree offers an abstraction level which allows
+to choose the type of underlying tree when it's created run-time.
+
+Also it adds some simple, but useful functionality like requesting
+a tree size, checking whether a tree is empty, cleaning tree and
+calling a function for each element.
+
+From the technical perspective the build system changed from pure Makefile
+to CMake.
 
 * Design
 
@@ -71,6 +86,10 @@ Below gives a definition of the comparison function:
   :         return p->key - q->key;
   : }
 
+Basically the comparison function should return zero if keys match,
+any negative value if the node A should be earlier in a tree or any
+positive non-zero value otherwise.
+
 A set of functions is provided to manipulate trees. All of them take
 only pointers to tree and node structures. They have no idea about the
 user's structures which contain them.
@@ -100,9 +119,6 @@ given by the returned node.
 
 ** Removal
 
-For speed reasons, the remove operation assumes that the node was
-already inserted into the tree.
-
 Indeed tree implementations using parent pointers don't need to do any
 lookups to retrieve the node's parent needed during the remove
 operation.
@@ -116,8 +132,15 @@ Since trees don't store duplicate keys, the library provides an
 operation to replace a node with another one whose key is equal to the
 replaced node.
 
-This operation is faster than remove/insert operations for balanced
-trees since it doesn't need to rebalance the tree.
+It is up to a user to make sure that the new key is equal to the
+replaced one. Here `equal` means that if you would use remove & insert
+sequence the new node would have the same previous and next nodes.
+For example, if a tree keys are integers and the tree content is:
+[ -2 1 5 9 ]
+we can safely replace key [ 5 ] with anything between [ 2 ] and [ 8 ].
+
+This operation is however faster than remove/insert operations for
+balanced trees since it doesn't need to rebalance the tree.
 
 ** Traversal
 
@@ -127,9 +150,10 @@ For that, you can retrieve the next or the previous of any inserted
 nodes. You can also get the first (leftmost) and the last (rightmost)
 node of a tree.
 
-* Installation
+You also can use *tree_foreach() and *tree_foreach_backward() for
+this purpose.
 
-The current Makefile has been tested on Linux and Windows system.
+* Installation
 
 To compile and install the library, just do something like, assuming
 current directory is named 'anytree' and contains source code:
@@ -144,3 +168,14 @@ on Linux:
   : $ cmake -DCMAKE_INSTALL_PREFIX=/opt ../anytree
 on Windows:
   : $ cmake -DCMAKE_INSTALL_PREFIX=C:/packages ../anytree
+
+On the same step you also can set kind of library you want to compile: shared or static:
+  : $ cmake -DBUILD_SHARED_LIBS=1
+  : $ cmake -DBUILD_SHARED_LIBS=0
+
+* Platforms
+
+It was tested on:
+    - Windows 8 with Cmake 2.8 and GCC 4.4.0
+    - Windows 8 with Cmake 2.8 and GCC 4.7.2
+
