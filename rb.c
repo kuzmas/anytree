@@ -36,12 +36,12 @@
 
 static inline enum rb_color get_color(const struct rbtree_node *node)
 {
-    return node->color;
+    return node->red_color ? RB_RED : RB_BLACK;
 }
 
 static inline void set_color(enum rb_color color, struct rbtree_node *node)
 {
-    node->color = color;
+    node->red_color = (color == RB_BLACK) ? 0 : 1;
 }
 
 static inline struct rbtree_node *get_parent(const struct rbtree_node *node)
@@ -466,4 +466,17 @@ int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t fn)
     tree->first = NULL;
     tree->last = NULL;
     return 0;
+}
+
+void rbtree_clean(struct rbtree *tree)
+{
+    struct rbtree_node *n;
+    struct rbtree_node *i;
+    for (i = rbtree_first(tree); i; )
+    {
+        n = rbtree_next(i);
+        INIT_NODE(i, NULL);
+        i = n;
+    }
+    rbtree_init(tree, tree->cmp_fn);
 }

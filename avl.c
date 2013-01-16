@@ -529,3 +529,16 @@ int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp)
     tree->height = -1;
     return 0;
 }
+
+void avltree_clean(struct avltree *tree)
+{
+    struct avltree_node *n;
+    struct avltree_node *i;
+    for (i = avltree_first(tree); i; )
+    {
+        n = avltree_next(i);
+        INIT_NODE(i, NULL);
+        i = n;
+    }
+    avltree_init(tree, tree->cmp_fn);
+}

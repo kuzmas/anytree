@@ -43,6 +43,7 @@ struct anytree_functions * get_avltree_functions(void)
         avltree_functions.insert_fn  = (anytree_insert_fn_t)avltree_insert;
         avltree_functions.remove_fn  = (anytree_remove_fn_t)avltree_remove;
         avltree_functions.replace_fn = (anytree_replace_fn_t)avltree_replace;
+        avltree_functions.clean_fn = (anytree_clean_fn_t)avltree_clean;
     }
     return &avltree_functions;
 }
@@ -62,6 +63,7 @@ struct anytree_functions * get_bstree_functions(void)
         bstree_functions.insert_fn  = (anytree_insert_fn_t)bstree_insert;
         bstree_functions.remove_fn  = (anytree_remove_fn_t)bstree_remove;
         bstree_functions.replace_fn = (anytree_replace_fn_t)bstree_replace;
+        bstree_functions.clean_fn = (anytree_clean_fn_t)bstree_clean;
     }
     return &bstree_functions;
 }
@@ -81,6 +83,7 @@ struct anytree_functions * get_rbtree_functions(void)
         rbtree_functions.insert_fn  = (anytree_insert_fn_t)rbtree_insert;
         rbtree_functions.remove_fn  = (anytree_remove_fn_t)rbtree_remove;
         rbtree_functions.replace_fn = (anytree_replace_fn_t)rbtree_replace;
+        rbtree_functions.clean_fn = (anytree_clean_fn_t)rbtree_clean;
     }
     return &rbtree_functions;
 }
@@ -100,6 +103,7 @@ struct anytree_functions * get_splaytree_functions(void)
         splaytree_functions.insert_fn  = (anytree_insert_fn_t)splaytree_insert;
         splaytree_functions.remove_fn  = (anytree_remove_fn_t)splaytree_remove;
         splaytree_functions.replace_fn = (anytree_replace_fn_t)splaytree_replace;
+        splaytree_functions.clean_fn = (anytree_clean_fn_t)splaytree_clean;
     }
     return &splaytree_functions;
 }

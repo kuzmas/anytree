@@ -74,5 +74,6 @@ void bstree_replace(struct bstree_node *old, struct bstree_node *node, struct bs
 #define bstree_size(TREE) (TREE->size)
 
 int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp);
+void bstree_clean(struct bstree *tree);
 
 #endif /* ANYTREE__BS__INCLUDED */

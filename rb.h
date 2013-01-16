@@ -51,7 +51,7 @@ struct rbtree_node {
     struct rbtree *tree;
     struct rbtree_node *left, *right;
     struct rbtree_node *parent;
-    enum rb_color color;
+    unsigned red_color:1;
 };
 
 typedef int (*rbtree_cmp_fn_t)(const struct rbtree_node *, const struct rbtree_node *);
@@ -78,5 +78,6 @@ void rbtree_replace(struct rbtree_node *old, struct rbtree_node *node, struct rb
 #define rbtree_size(TREE) (TREE->size)
 
 int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t cmp);
+void rbtree_clean(struct rbtree *tree);
 
 #endif /* ANYTREE__RB__INCLUDED */

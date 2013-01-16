@@ -65,6 +65,8 @@ typedef struct anytree_node * (*anytree_insert_fn_t)(struct anytree_node *node, 
 typedef void (*anytree_remove_fn_t)(struct anytree_node *node, struct anytree *tree);
 typedef void (*anytree_replace_fn_t)(struct anytree_node *old, struct anytree_node *node, struct anytree *tree);
 
+typedef void (*anytree_clean_fn_t)(const struct anytree *tree);
+
 struct anytree_functions {
     anytree_first_fn_t first_fn;
     anytree_last_fn_t last_fn;
@@ -75,6 +77,8 @@ struct anytree_functions {
     anytree_insert_fn_t insert_fn;
     anytree_remove_fn_t remove_fn;
     anytree_replace_fn_t replace_fn;
+
+    anytree_clean_fn_t clean_fn;
 };
 
 struct anytree_common {
@@ -103,6 +107,8 @@ struct anytree {
 #define anytree_insert(NODE, TREE) (TREE->functions->insert_fn(NODE, TREE))
 #define anytree_remove(NODE) (NODE->tree->functions->remove_fn(NODE, NODE->tree))
 #define anytree_replace(OLD, NODE) (OLD->tree->functions->replace_fn(OLD, NODE, OLD->tree))
+
+#define anytree_clean(TREE) (TREE->functions->clean_fn(TREE))
 
 #define anytree_is_empty(TREE) (TREE->common.size == 0)
 #define anytree_size(TREE) (TREE->common.size)

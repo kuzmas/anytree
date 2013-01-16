@@ -300,3 +300,16 @@ int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp)
     tree->root = NULL;
     return 0;
 }
+
+void bstree_clean(struct bstree *tree)
+{
+    struct bstree_node *n;
+    struct bstree_node *i;
+    for (i = bstree_first(tree); i; )
+    {
+        n = bstree_next(i);
+        INIT_NODE(i, NULL);
+        i = n;
+    }
+    bstree_init(tree, tree->cmp_fn);
+}

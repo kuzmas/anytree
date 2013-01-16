@@ -74,5 +74,6 @@ void splaytree_replace(struct splaytree_node *old, struct splaytree_node *node, 
 #define splaytree_size(TREE) (TREE->size)
 
 int splaytree_init(struct splaytree *tree, splaytree_cmp_fn_t cmp);
+void splaytree_clean(struct splaytree *tree);
 
 #endif /* ANYTREE__SPLAY__INCLUDED */

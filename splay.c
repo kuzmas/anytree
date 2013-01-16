@@ -334,3 +334,16 @@ int splaytree_init(struct splaytree *tree, splaytree_cmp_fn_t cmp)
     tree->last = NULL;
     return 0;
 }
+
+void splaytree_clean(struct splaytree *tree)
+{
+    struct splaytree_node *n;
+    struct splaytree_node *i;
+    for (i = splaytree_first(tree); i; )
+    {
+        n = splaytree_next(i);
+        INIT_NODE(i, NULL);
+        i = n;
+    }
+    splaytree_init(tree, tree->cmp_fn);
+}

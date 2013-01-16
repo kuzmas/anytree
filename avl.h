@@ -76,5 +76,6 @@ void avltree_replace(struct avltree_node *old, struct avltree_node *node, struct
 #define avltree_size(TREE) (TREE->size)
 
 int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp);
+void avltree_clean(struct avltree *tree);
 
 #endif /* ANYTREE__AVL__INCLUDED */
