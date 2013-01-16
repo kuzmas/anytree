@@ -72,6 +72,9 @@ struct avltree_node *avltree_insert(struct avltree_node *node, struct avltree *t
 void avltree_remove(struct avltree_node *node, struct avltree *tree);
 void avltree_replace(struct avltree_node *old, struct avltree_node *node, struct avltree *tree);
 
+#define avltree_is_empty(TREE) (TREE->size == 0)
+#define avltree_size(TREE) (TREE->size)
+
 int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__AVL__INCLUDED */

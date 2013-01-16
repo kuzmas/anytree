@@ -74,6 +74,9 @@ struct rbtree_node *rbtree_insert(struct rbtree_node *node, struct rbtree *tree)
 void rbtree_remove(struct rbtree_node *node, struct rbtree *tree);
 void rbtree_replace(struct rbtree_node *old, struct rbtree_node *node, struct rbtree *tree);
 
+#define rbtree_is_empty(TREE) (TREE->size == 0)
+#define rbtree_size(TREE) (TREE->size)
+
 int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__RB__INCLUDED */

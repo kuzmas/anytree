@@ -70,6 +70,9 @@ struct splaytree_node *splaytree_insert( struct splaytree_node *node, struct spl
 void splaytree_remove(struct splaytree_node *node, struct splaytree *tree);
 void splaytree_replace(struct splaytree_node *old, struct splaytree_node *node, struct splaytree *tree);
 
+#define splaytree_is_empty(TREE) (TREE->size == 0)
+#define splaytree_size(TREE) (TREE->size)
+
 int splaytree_init(struct splaytree *tree, splaytree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__SPLAY__INCLUDED */

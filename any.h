@@ -94,15 +94,18 @@ struct anytree {
     struct anytree_functions *functions;
 };
 
-#define anytree_first(TREE) TREE->functions->first_fn(TREE)
-#define anytree_last(TREE) TREE->functions->last_fn(TREE)
-#define anytree_next(NODE) NODE->tree->functions->next_fn(NODE)
-#define anytree_prev(NODE) NODE->tree->functions->prev_fn(NODE)
+#define anytree_first(TREE) (TREE->functions->first_fn(TREE))
+#define anytree_last(TREE) (TREE->functions->last_fn(TREE))
+#define anytree_next(NODE) (NODE->tree->functions->next_fn(NODE))
+#define anytree_prev(NODE) (NODE->tree->functions->prev_fn(NODE))
 
-#define anytree_lookup(KEY, TREE) TREE->functions->lookup_fn(KEY, TREE)
-#define anytree_insert(NODE, TREE) TREE->functions->insert_fn(NODE, TREE)
-#define anytree_remove(NODE) NODE->tree->functions->remove_fn(NODE, NODE->tree)
-#define anytree_replace(OLD, NODE) OLD->tree->functions->replace_fn(OLD, NODE, OLD->tree)
+#define anytree_lookup(KEY, TREE) (TREE->functions->lookup_fn(KEY, TREE))
+#define anytree_insert(NODE, TREE) (TREE->functions->insert_fn(NODE, TREE))
+#define anytree_remove(NODE) (NODE->tree->functions->remove_fn(NODE, NODE->tree))
+#define anytree_replace(OLD, NODE) (OLD->tree->functions->replace_fn(OLD, NODE, OLD->tree))
+
+#define anytree_is_empty(TREE) (TREE->common.size == 0)
+#define anytree_size(TREE) (TREE->common.size)
 
 
 enum anytree_type {

@@ -70,6 +70,9 @@ struct bstree_node *bstree_insert(struct bstree_node *node, struct bstree *tree)
 void bstree_remove(struct bstree_node *node, struct bstree *tree);
 void bstree_replace(struct bstree_node *old, struct bstree_node *node, struct bstree *tree);
 
+#define bstree_is_empty(TREE) (TREE->size == 0)
+#define bstree_size(TREE) (TREE->size)
+
 int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp);
 
 #endif /* ANYTREE__BS__INCLUDED */
