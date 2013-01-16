@@ -54,6 +54,7 @@ typedef int (*splaytree_cmp_fn_t)(const struct splaytree_node *, const struct sp
 
 struct splaytree {
     splaytree_cmp_fn_t cmp_fn;
+    unsigned size;
 
     struct splaytree_node *root;
     struct splaytree_node *first, *last;

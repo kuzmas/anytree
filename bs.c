@@ -172,6 +172,8 @@ struct bstree_node *bstree_insert(struct bstree_node *node, struct bstree *tree)
     if (key)
         return key;
 
+    ++tree->size;
+
     INIT_NODE(node, tree);
 
     if (!parent) {
@@ -207,6 +209,11 @@ void bstree_remove(struct bstree_node *node, struct bstree *tree)
     struct bstree_node *left, *right, *next;
     struct bstree_node fake_parent, *parent;
     int is_left;
+
+    if (tree && (node->tree != tree))
+        return;
+
+    --tree->size;
 
     do_lookup(node, tree, &parent, &is_left);
 
@@ -288,7 +295,8 @@ void bstree_replace(struct bstree_node *old, struct bstree_node *node, struct bs
 
 int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp)
 {
-    tree->root = NULL;
     tree->cmp_fn = cmp;
+    tree->size = 0;
+    tree->root = NULL;
     return 0;
 }

@@ -54,6 +54,7 @@ typedef int (*bstree_cmp_fn_t)(const struct bstree_node *, const struct bstree_n
 
 struct bstree {
     bstree_cmp_fn_t cmp_fn;
+    unsigned size;
 
     struct bstree_node *root;
     struct bstree_node *first, *last;

@@ -238,6 +238,8 @@ struct splaytree_node *splaytree_insert(struct splaytree_node *node, struct spla
     int res;
 
     if (!root) {
+        ++tree->size;
+
         INIT_NODE(node, tree);
         tree->root = node;
         tree->first = node;
@@ -248,6 +250,8 @@ struct splaytree_node *splaytree_insert(struct splaytree_node *node, struct spla
     res = do_splay(node, tree);
     if (res == 0)
         return tree->root;
+
+    ++tree->size;
 
     INIT_NODE(node, tree);
 
@@ -280,6 +284,11 @@ struct splaytree_node *splaytree_insert(struct splaytree_node *node, struct spla
 void splaytree_remove(struct splaytree_node *node, struct splaytree *tree)
 {
     struct splaytree_node *right, *left, *prev;
+
+    if (tree && (node->tree != tree))
+        return;
+
+    --tree->size;
 
     do_splay(node, tree);
     assert(tree->root == node); /* 'node' must be present */
@@ -318,9 +327,10 @@ void splaytree_replace(struct splaytree_node *old, struct splaytree_node *node, 
 
 int splaytree_init(struct splaytree *tree, splaytree_cmp_fn_t cmp)
 {
+    tree->cmp_fn = cmp;
+    tree->size = 0;
     tree->root = NULL;
     tree->first = NULL;
     tree->last = NULL;
-    tree->cmp_fn = cmp;
     return 0;
 }

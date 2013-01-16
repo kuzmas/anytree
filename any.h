@@ -77,9 +77,14 @@ struct anytree_functions {
     anytree_replace_fn_t replace_fn;
 };
 
+struct anytree_common {
+    anytree_cmp_fn_t cmp_fn;
+    unsigned size;
+};
+
 struct anytree {
     union {
-        anytree_cmp_fn_t cmp_fn;
+        struct anytree_common common;
         struct avltree avl;
         struct bstree bs;
         struct rbtree rb;

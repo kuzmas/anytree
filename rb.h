@@ -58,6 +58,7 @@ typedef int (*rbtree_cmp_fn_t)(const struct rbtree_node *, const struct rbtree_n
 
 struct rbtree {
     rbtree_cmp_fn_t cmp_fn;
+    unsigned size;
 
     struct rbtree_node *root;
     struct rbtree_node *first, *last;

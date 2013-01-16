@@ -226,7 +226,10 @@ struct rbtree_node *rbtree_insert(struct rbtree_node *node, struct rbtree *tree)
     if (key)
         return key;
 
+    ++tree->size;
+
     INIT_NODE(node, tree);
+
     set_parent(parent, node);
 
     if (parent) {
@@ -301,6 +304,11 @@ void rbtree_remove(struct rbtree_node *node, struct rbtree *tree)
     struct rbtree_node *right = node->right;
     struct rbtree_node *next;
     enum rb_color color;
+
+    if (tree && (node->tree != tree))
+        return;
+
+    --tree->size;
 
     if (node == tree->first)
         tree->first = rbtree_next(node);
@@ -452,8 +460,9 @@ void rbtree_replace(struct rbtree_node *old, struct rbtree_node *node, struct rb
 
 int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t fn)
 {
-    tree->root = NULL;
     tree->cmp_fn = fn;
+    tree->size = 0;
+    tree->root = NULL;
     tree->first = NULL;
     tree->last = NULL;
     return 0;

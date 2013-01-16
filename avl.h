@@ -54,6 +54,7 @@ typedef int (*avltree_cmp_fn_t)(const struct avltree_node *, const struct avltre
 
 struct avltree {
     avltree_cmp_fn_t cmp_fn;
+    unsigned size;
 
     struct avltree_node *root;
     struct avltree_node *first, *last;
