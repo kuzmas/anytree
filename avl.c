@@ -532,13 +532,8 @@ int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp)
 
 void avltree_clean(struct avltree *tree)
 {
-    struct avltree_node *n;
     struct avltree_node *i;
-    for (i = avltree_first(tree); i; )
-    {
-        n = avltree_next(i);
-        INIT_NODE(i, NULL);
-        i = n;
-    }
+    for (i = avltree_first(tree); i; i = avltree_next(i))
+        i->tree = NULL;
     avltree_init(tree, tree->cmp_fn);
 }

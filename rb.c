@@ -470,13 +470,8 @@ int rbtree_init(struct rbtree *tree, rbtree_cmp_fn_t fn)
 
 void rbtree_clean(struct rbtree *tree)
 {
-    struct rbtree_node *n;
     struct rbtree_node *i;
-    for (i = rbtree_first(tree); i; )
-    {
-        n = rbtree_next(i);
-        INIT_NODE(i, NULL);
-        i = n;
-    }
+    for (i = rbtree_first(tree); i; i = rbtree_next(i))
+        i->tree = NULL;
     rbtree_init(tree, tree->cmp_fn);
 }
