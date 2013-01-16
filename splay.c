@@ -249,6 +249,8 @@ struct splaytree_node *splaytree_insert(struct splaytree_node *node, struct spla
     if (res == 0)
         return tree->root;
 
+    INIT_NODE(node, tree);
+
     root = tree->root;
     if (res < 0) {
         struct splaytree_node *left = get_left(root);

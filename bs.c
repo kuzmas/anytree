@@ -20,16 +20,6 @@
  */
 #include "bs.h"
 
-/*
- * This is where the black magic is defined. If you're lucky enough to
- * work on a system that doesn't support these kind of tricks then we
- * assume UINTPTR_MAX and uintptr_t type are not defined.
- *
- * Note that the getters returns a pointer when appropriate otherwise
- * NULL;
- */
-
-#define NODE_INIT    { NULL, }
 
 static inline void INIT_NODE(struct bstree_node *node, struct bstree *tree)
 {
@@ -182,8 +172,9 @@ struct bstree_node *bstree_insert(struct bstree_node *node, struct bstree *tree)
     if (key)
         return key;
 
+    INIT_NODE(node, tree);
+
     if (!parent) {
-        INIT_NODE(node, tree);
         tree->root = tree->first = tree->last = node;
         return NULL;
     }
@@ -220,7 +211,7 @@ void bstree_remove(struct bstree_node *node, struct bstree *tree)
     do_lookup(node, tree, &parent, &is_left);
 
     if (!parent) {
-        INIT_NODE(&fake_parent, NULL);
+        INIT_NODE(&fake_parent, tree);
         parent = &fake_parent;
         is_left = 0;
     }
