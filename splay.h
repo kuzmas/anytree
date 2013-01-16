@@ -76,4 +76,8 @@ void splaytree_replace(struct splaytree_node *old, struct splaytree_node *node, 
 int splaytree_init(struct splaytree *tree, splaytree_cmp_fn_t cmp);
 void splaytree_clean(struct splaytree *tree);
 
+typedef void (*splaytree_call_fn_t)(const struct splaytree_node *);
+void splaytree_foreach(struct splaytree *tree, splaytree_call_fn_t call);
+void splaytree_foreach_backward(struct splaytree *tree, splaytree_call_fn_t call);
+
 #endif /* ANYTREE__SPLAY__INCLUDED */

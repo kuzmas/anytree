@@ -342,3 +342,27 @@ void splaytree_clean(struct splaytree *tree)
         i->tree = NULL;
     splaytree_init(tree, tree->cmp_fn);
 }
+
+void splaytree_foreach(struct splaytree *tree, splaytree_call_fn_t call)
+{
+    struct splaytree_node * i;
+    struct splaytree_node * n;
+    for (i = splaytree_first(tree); i; )
+    {
+        n = splaytree_next(i);
+        call(i);
+        i = n;
+    }
+}
+
+void splaytree_foreach_backward(struct splaytree *tree, splaytree_call_fn_t call)
+{
+    struct splaytree_node * i;
+    struct splaytree_node * n;
+    for (i = splaytree_last(tree); i; )
+    {
+        n = splaytree_prev(i);
+        call(i);
+        i = n;
+    }
+}

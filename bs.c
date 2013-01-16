@@ -308,3 +308,27 @@ void bstree_clean(struct bstree *tree)
         i->tree = NULL;
     bstree_init(tree, tree->cmp_fn);
 }
+
+void bstree_foreach(struct bstree *tree, bstree_call_fn_t call)
+{
+    struct bstree_node * i;
+    struct bstree_node * n;
+    for (i = bstree_first(tree); i; )
+    {
+        n = bstree_next(i);
+        call(i);
+        i = n;
+    }
+}
+
+void bstree_foreach_backward(struct bstree *tree, bstree_call_fn_t call)
+{
+    struct bstree_node * i;
+    struct bstree_node * n;
+    for (i = bstree_last(tree); i; )
+    {
+        n = bstree_prev(i);
+        call(i);
+        i = n;
+    }
+}

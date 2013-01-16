@@ -78,4 +78,8 @@ void avltree_replace(struct avltree_node *old, struct avltree_node *node, struct
 int avltree_init(struct avltree *tree, avltree_cmp_fn_t cmp);
 void avltree_clean(struct avltree *tree);
 
+typedef void (*avltree_call_fn_t)(const struct avltree_node *);
+void avltree_foreach(struct avltree *tree, avltree_call_fn_t call);
+void avltree_foreach_backward(struct avltree *tree, avltree_call_fn_t call);
+
 #endif /* ANYTREE__AVL__INCLUDED */

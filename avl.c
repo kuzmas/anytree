@@ -537,3 +537,27 @@ void avltree_clean(struct avltree *tree)
         i->tree = NULL;
     avltree_init(tree, tree->cmp_fn);
 }
+
+void avltree_foreach(struct avltree *tree, avltree_call_fn_t call)
+{
+    struct avltree_node * i;
+    struct avltree_node * n;
+    for (i = avltree_first(tree); i; )
+    {
+        n = avltree_next(i);
+        call(i);
+        i = n;
+    }
+}
+
+void avltree_foreach_backward(struct avltree *tree, avltree_call_fn_t call)
+{
+    struct avltree_node * i;
+    struct avltree_node * n;
+    for (i = avltree_last(tree); i; )
+    {
+        n = avltree_prev(i);
+        call(i);
+        i = n;
+    }
+}

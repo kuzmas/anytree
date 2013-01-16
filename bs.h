@@ -76,4 +76,8 @@ void bstree_replace(struct bstree_node *old, struct bstree_node *node, struct bs
 int bstree_init(struct bstree *tree, bstree_cmp_fn_t cmp);
 void bstree_clean(struct bstree *tree);
 
+typedef void (*bstree_call_fn_t)(const struct bstree_node *);
+void bstree_foreach(struct bstree *tree, bstree_call_fn_t call);
+void bstree_foreach_backward(struct bstree *tree, bstree_call_fn_t call);
+
 #endif /* ANYTREE__BS__INCLUDED */

@@ -108,10 +108,14 @@ struct anytree {
 #define anytree_remove(NODE) (NODE->tree->functions->remove_fn(NODE, NODE->tree))
 #define anytree_replace(OLD, NODE) (OLD->tree->functions->replace_fn(OLD, NODE, OLD->tree))
 
-#define anytree_clean(TREE) (TREE->functions->clean_fn(TREE))
-
 #define anytree_is_empty(TREE) (TREE->common.size == 0)
 #define anytree_size(TREE) (TREE->common.size)
+
+#define anytree_clean(TREE) (TREE->functions->clean_fn(TREE))
+
+typedef void (*anytree_call_fn_t)(const struct anytree_node *);
+void anytree_foreach(struct anytree *tree, anytree_call_fn_t call);
+void anytree_foreach_backward(struct anytree *tree, anytree_call_fn_t call);
 
 
 enum anytree_type {
@@ -123,10 +127,5 @@ enum anytree_type {
 
 struct anytree * anytree_init(enum anytree_type type, anytree_cmp_fn_t cmp);
 void anytree_release(struct anytree *tree);
-
-typedef void (*anytree_call_fn_t)(const struct anytree_node *);
-void anytree_foreach(struct anytree *tree, anytree_call_fn_t call);
-void anytree_foreach_backward(struct anytree *tree, anytree_call_fn_t call);
-
 
 #endif /* ANYTREE__ANY__INCLUDED */

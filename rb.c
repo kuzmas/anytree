@@ -475,3 +475,27 @@ void rbtree_clean(struct rbtree *tree)
         i->tree = NULL;
     rbtree_init(tree, tree->cmp_fn);
 }
+
+void rbtree_foreach(struct rbtree *tree, rbtree_call_fn_t call)
+{
+    struct rbtree_node * i;
+    struct rbtree_node * n;
+    for (i = rbtree_first(tree); i; )
+    {
+        n = rbtree_next(i);
+        call(i);
+        i = n;
+    }
+}
+
+void rbtree_foreach_backward(struct rbtree *tree, rbtree_call_fn_t call)
+{
+    struct rbtree_node * i;
+    struct rbtree_node * n;
+    for (i = rbtree_last(tree); i; )
+    {
+        n = rbtree_prev(i);
+        call(i);
+        i = n;
+    }
+}
