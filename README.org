@@ -178,4 +178,5 @@ On the same step you also can set kind of library you want to compile: shared or
 It was tested on:
     - Windows 8 with Cmake 2.8 and GCC 4.4.0
     - Windows 8 with Cmake 2.8 and GCC 4.7.2
-
+    - Linux Ubuntu 12.10 with CMake 2.8 and GCC 4.7.2
+    - Linux Ubuntu 12.10 with CMake 2.8 and Clang 3.1.0
